@@ -11,13 +11,9 @@ namespace Xadrez
             try
             {
                 Tabuleiro tab = new Tabuleiro(8, 8);
-
-                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(2, 2));
-                tab.ColocarPeca(new Rei(tab, Cor.Branca), new Posicao(3, 6));
-
-                tab.ColocarPeca(new Rei(tab, Cor.Preta), new Posicao(2, 2));
-
-                Tela.ImpromiTabuleiro(tab);
+                PosicaoXadrez pos = new PosicaoXadrez('a', 1);
+                Console.WriteLine(pos);
+                Console.WriteLine(pos.ToPosicao());
             }
             catch (TblException e)
             {
