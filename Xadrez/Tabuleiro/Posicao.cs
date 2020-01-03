@@ -6,10 +6,10 @@ namespace tabuleiro
         public int Linha { get; set; }
         public int Coluna { get; set; }
 
-        public Posicao( int linha, int posica)
+        public Posicao( int linha, int coluna)
         {
             Linha = linha;
-            Coluna = Coluna;
+            Coluna = coluna;
         }
 
         public override string ToString()
