@@ -8,12 +8,21 @@ namespace Xadrez
     {
         static void Main(string[] args)
         {
-            Tabuleiro tab = new Tabuleiro(8, 8);
+            try
+            {
+                Tabuleiro tab = new Tabuleiro(8, 8);
 
-            tab.ColocarPeca(new Torre(tab, Cor.Preta) , new Posicao(2, 2));
-            tab.ColocarPeca(new Rei(tab, Cor.Branca), new Posicao(3, 6));
+                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(2, 2));
+                tab.ColocarPeca(new Rei(tab, Cor.Branca), new Posicao(3, 6));
 
-            Tela.ImpromiTabuleiro(tab);
+                tab.ColocarPeca(new Rei(tab, Cor.Preta), new Posicao(2, 2));
+
+                Tela.ImpromiTabuleiro(tab);
+            }
+            catch (TblException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
