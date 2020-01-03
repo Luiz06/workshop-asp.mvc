@@ -46,7 +46,7 @@ namespace tabuleiro
 
         public bool PosicaoValida(Posicao pos)
         {
-            if (pos.Linha < 0 || pos.Linha >= Linha || pos.Coluna<0 || pos.Coluna>=0)
+            if (pos.Linha < 0 || pos.Linha >= Linha || pos.Coluna<0 || pos.Coluna>= Coluna)
             {
                 return false;
             }
