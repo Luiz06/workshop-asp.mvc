@@ -1,5 +1,6 @@
 ﻿using System;
 using tabuleiro;
+using xadrez;
 
 
 namespace Xadrez
@@ -41,6 +42,16 @@ namespace Xadrez
                 Console.Write(peca);
                 Console.ForegroundColor = aux;
             }
+        }
+
+        public static PosicaoXadrez LerPosicao()
+        {
+            string s = Console.ReadLine();
+            char coluna = s[0];
+            int linha = int.Parse(s[1] + "");
+            return new PosicaoXadrez(coluna, linha);
+
+
         }
     }
 }

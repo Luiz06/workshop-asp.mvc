@@ -10,13 +10,21 @@ namespace Xadrez
         {
             try
             {
-                Tabuleiro tab = new Tabuleiro(8, 8);
+                PartidaDeXadrez Partida = new PartidaDeXadrez();
 
-                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(2, 4));
-                tab.ColocarPeca(new Rei(tab, Cor.Branca), new Posicao(3, 3));
-                tab.ColocarPeca(new Rei(tab, Cor.Preta), new Posicao(5, 2));
+                while (!Partida.Terminada)
+                {
+                    Console.Clear();
+                    Tela.ImpromiTabuleiro(Partida.Tab);
 
-                Tela.ImpromiTabuleiro(tab);
+                    Console.WriteLine();
+                    Console.Write("Digite origem ");
+                    Posicao origem = Tela.LerPosicao().ToPosicao();
+                    Console.Write("Digite origem ");
+                    Posicao destino = Tela.LerPosicao().ToPosicao();
+
+                    Partida.ExecutaMovimento(origem, destino);
+                }
             }
             catch (TblException e)
             {

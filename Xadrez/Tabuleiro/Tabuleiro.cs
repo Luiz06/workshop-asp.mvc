@@ -36,6 +36,17 @@ namespace tabuleiro
             Peca[pos.Linha, pos.Coluna] = p;
             p.Posicao = pos;
         }
+        public Peca RetiraPeca(Posicao pos)
+        {
+            if(Pecas(pos) == null)
+            {
+                return null;
+            }
+            Peca aux = Pecas(pos);
+            aux.Posicao = null;
+            Peca[pos.Linha, pos.Coluna] = null;
+            return aux;
+        }
 
         public bool ExistePeca(Posicao pos)
         {

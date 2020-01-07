@@ -18,5 +18,9 @@ namespace tabuleiro
             Tab = tab;
             QuantMovimentos = 0;
         }
+        public void QuantMovimento()
+        {
+            QuantMovimentos++;
+        }
     }
 }
