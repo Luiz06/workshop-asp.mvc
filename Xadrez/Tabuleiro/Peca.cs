@@ -8,7 +8,7 @@ namespace tabuleiro
     {
         public Posicao Posicao { get; set; }
         public Cor Cor { get; set; }
-        public int  QuantMovimentos{ get; set; }
+        public int QuantMovimentos { get; set; }
         public Tabuleiro Tab { get; set; }
 
         public Peca(Cor cor, Tabuleiro tab)
@@ -23,7 +23,29 @@ namespace tabuleiro
             QuantMovimentos++;
         }
 
+        public bool ExisteMovimentosPossiveis()
+        {
+            bool[,] mat = MovimentosPosiveis();
+            for (int i = 0; i < Tab.Linha ; i++)
+            {
+                for (int j = 0; j < Tab.Coluna; j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+
+            }
+            return false;
+        }
+
+        public bool PodeMoverPara(Posicao pos)
+        {
+            return MovimentosPosiveis()[pos.Linha, pos.Coluna];
+        }
+
         public abstract bool[,] MovimentosPosiveis();
-        
+
     }
 }

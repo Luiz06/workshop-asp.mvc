@@ -14,22 +14,35 @@ namespace Xadrez
 
                 while (!Partida.Terminada)
                 {
-                    Console.Clear();
-                    Tela.ImprimiTabuleiro(Partida.Tab);
+                    try
+                    {
+                        Console.Clear();
+                        Tela.ImprimiTabuleiro(Partida.Tab);
+                        Console.WriteLine();
+                        Console.WriteLine("Turno: " + Partida.Turno);
+                        Console.WriteLine("Aguardando jogador " + Partida.JogadorAtual);
 
-                    Console.WriteLine();
-                    Console.Write("Digite origem ");
-                    Posicao origem = Tela.LerPosicao().ToPosicao();              
+                        Console.WriteLine();
+                        Console.Write("Digite origem ");
+                        Posicao origem = Tela.LerPosicao().ToPosicao();
+                        Partida.ValidarPosicaoOrigem(origem);
 
-                    bool[,] posicoesPosiveis = Partida.Tab.Pecas(origem).MovimentosPosiveis();
+                        bool[,] posicoesPosiveis = Partida.Tab.Pecas(origem).MovimentosPosiveis();
 
-                    Console.Clear();
-                    Tela.ImprimiTabuleiro(Partida.Tab, posicoesPosiveis);
-                    Console.WriteLine();
-                    Console.Write("Digite origem ");
-                    Posicao destino = Tela.LerPosicao().ToPosicao();
+                        Console.Clear();
+                        Tela.ImprimiTabuleiro(Partida.Tab, posicoesPosiveis);
+                        Console.WriteLine();
+                        Console.Write("Digite Destino ");
+                        Posicao destino = Tela.LerPosicao().ToPosicao();
+                        Partida.ValidarPosicaoDestino(origem, destino);
 
-                    Partida.ExecutaMovimento(origem, destino);
+                        Partida.RealizaJogada(origem, destino);
+                    }
+                    catch (TblException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
                 }
             }
             catch (TblException e)
