@@ -15,11 +15,17 @@ namespace Xadrez
                 while (!Partida.Terminada)
                 {
                     Console.Clear();
-                    Tela.ImpromiTabuleiro(Partida.Tab);
+                    Tela.ImprimiTabuleiro(Partida.Tab);
 
                     Console.WriteLine();
                     Console.Write("Digite origem ");
-                    Posicao origem = Tela.LerPosicao().ToPosicao();
+                    Posicao origem = Tela.LerPosicao().ToPosicao();              
+
+                    bool[,] posicoesPosiveis = Partida.Tab.Pecas(origem).MovimentosPosiveis();
+
+                    Console.Clear();
+                    Tela.ImprimiTabuleiro(Partida.Tab, posicoesPosiveis);
+                    Console.WriteLine();
                     Console.Write("Digite origem ");
                     Posicao destino = Tela.LerPosicao().ToPosicao();
 
