@@ -82,6 +82,39 @@ namespace xadrez
             return false;
         }
 
+        public bool TesteXeque(Cor cor)
+        {
+            if (!EstaEmXeque(cor))
+            {
+                return false;
+            }
+            foreach (Peca x in PecasJogo(cor))
+            {
+                bool[,] mat = x.MovimentosPosiveis();
+                for (int i = 0; i < Tab.Linha; i++)
+                {
+                    for (int j = 0; j < Tab.Coluna; j++)
+                    {
+                        if(mat[i,j])
+                        {
+                            Posicao origem = x.Posicao;
+                            Posicao destino = new Posicao(i, j);
+                            Peca pecaCapturada = ExecutaMovimento(x.Posicao, new Posicao(i, j));
+                            bool testXeque = EstaEmXeque(cor);
+                            DesfazerMovimento(origem, destino, pecaCapturada);
+                            if(!testXeque)
+                            {
+                                return false;
+                            }
+
+                        }
+                    }
+                }
+
+            }
+            return true;
+        }
+
         public Peca ExecutaMovimento(Posicao origem, Posicao destino)
         {
             Peca p = Tab.RetiraPeca(origem);
@@ -118,6 +151,7 @@ namespace xadrez
                 throw new TblException("posição de destino inválida!");
             }
         }
+
         public void RealizaJogada(Posicao origem, Posicao destino)
         {
             Peca pecaCapturada = ExecutaMovimento(origem, destino);
@@ -127,16 +161,22 @@ namespace xadrez
                 throw new TblException("Você não pode se por em xeque");
             }
             if (EstaEmXeque(Adversaria(JogadorAtual)))
-            { 
+            {
                 Xeque = true;
             }
             else
             {
                 Xeque = false;
             }
-
-            Turno++;
-            MudaJogador();
+            if (TesteXeque(Adversaria(JogadorAtual)))
+            {
+                Terminada = true;
+            }
+            else
+            {
+                Turno++;
+                MudaJogador();
+            }
         }
 
         public void MudaJogador()
